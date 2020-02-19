@@ -20,7 +20,6 @@ async function search(topic) {
   console.log("Spider started!!!");
   const data = require("../database/database.json");
   const result = await scholar.search(topic);
-  console.log(result);
   result.results.map(doc => {
     if (doc.title != "") {
       if (doc.description != "") {
@@ -28,6 +27,7 @@ async function search(topic) {
           if (!data.some(e => e.title == doc.title)) {
             const uid = uuidv1();
             if (downloadPDF(doc.pdf, "./pdf/" + uid + ".pdf")) {
+              console.log("Saving document")
               data.push({
                 id: uid,
                 title: doc.title,
