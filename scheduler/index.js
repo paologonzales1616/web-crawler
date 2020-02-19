@@ -4,12 +4,10 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-cron.schedule('*/5 * * * *', () => {
-    console.log("Scheduler Started");
+cron.schedule("*/2 * * * *", () => {
+  console.log("Scheduler Started");
   const topics = require("../database/topics.json");
-  search(topics[getRandomInt(topics.length - 1)]);
+  const topic = topics[getRandomInt(topics.length - 1)]
+  console.log(topic);
+  search(topic);
 });
-
-// setInterval(() => {
-
-// }, 300000);

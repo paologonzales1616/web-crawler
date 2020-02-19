@@ -1,20 +1,6 @@
 const scholar = require("google-scholar");
-const request = require("request-promise-native");
 const fs = require("fs");
 const uuidv1 = require("uuid/v1");
-
-async function downloadPDF(pdfURL, outputFilename) {
-  try {
-    let pdfBuffer = await request.get({ uri: pdfURL, encoding: null });
-    console.log("Writing downloaded PDF file to " + outputFilename + "...");
-    fs.writeFileSync(outputFilename, pdfBuffer);
-    console.log("Done downloading");
-    return true;
-  } catch (error) {
-    console.log("Error Downloading pdf");
-    return false;
-  }
-}
 
 async function search(topic) {
   console.log("Spider started!!!");
@@ -25,9 +11,10 @@ async function search(topic) {
       if (doc.description != "") {
         if (doc.pdf != undefined) {
           if (!data.some(e => e.title == doc.title)) {
-            const uid = uuidv1();
-            if (downloadPDF(doc.pdf, "./pdf/" + uid + ".pdf")) {
-              console.log("Saving document")
+            const link = doc.pdf.split(".");
+            if (link[link.length - 1] == "pdf") {
+              const uid = uuidv1();
+              console.log("Saving document");
               data.push({
                 id: uid,
                 title: doc.title,
