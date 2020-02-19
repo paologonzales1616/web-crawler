@@ -17,9 +17,9 @@
     "express": "^4.17.1",
     "google-scholar": "^1.5.1",
     "helmet": "^3.21.1",
-    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3",
-    "request-promise-native": "^1.0.8"
+    "request-promise-native": "^1.0.8",
+    "uuid": "^3.4.0"
   }
 }
